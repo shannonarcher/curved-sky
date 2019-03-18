@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 import Markdown from "vue-markdown";
 
 export default {
@@ -33,26 +33,9 @@ export default {
   mounted() {
     this.getPosts();
   },
-  methods: {
-    getPosts() {
-      return axios
-        .get(
-          "http://cms.shannonarcher.me/posts?published=1&_sort=created_at:DESC"
-        )
-        .then(({ data: posts }) => {
-          this.posts = posts.map(post => {
-            return {
-              ...post,
-              body: post.body.match(/\!\[.*\]\(.*\)/).reduce((acc, image) => {
-                return acc
-                  .split(image)
-                  .join(image.replace("](", "](http://cms.shannonarcher.me"));
-              }, post.body)
-            };
-          });
-        });
-    }
-  }
+  methods: mapActions({
+    getPosts: "blog/getPosts"
+  })
 };
 </script>
 

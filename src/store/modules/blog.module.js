@@ -30,9 +30,11 @@ export default {
       });
     },
     getPosts({ commit }) {
-      return axios.get('http://cms.shannonarcher.me/posts/').then(({ data: posts }) => {
-        commit('setPosts', posts.map(transformPost));
-      });
+      return axios
+        .get('http://cms.shannonarcher.me/posts?published=1&_sort=created_at:DESC')
+        .then(({ data: posts }) => {
+          commit('setPosts', posts.map(transformPost));
+        });
     },
   },
   mutations: {
