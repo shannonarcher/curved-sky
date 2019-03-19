@@ -11,16 +11,28 @@
     </div>
     <div class="sidebar__project-links">
       <ul>
-        <li>Pomodoro</li>
-        <li>Cuddly Pickle</li>
-        <li>Curved Sky</li>
+        <li v-for="project in projects" :key="project.id">
+          <a :href="project.link">{{ project.name }}</a>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapActions } from 'vuex';
+
+export default {
+  mounted() {
+    this.getProjects();
+  },
+  computed: mapGetters({
+    projects: 'projects/entries',
+  }),
+  methods: mapActions({
+    getProjects: 'projects/getEntries',
+  }),
+};
 </script>
 
 <style lang="sass">

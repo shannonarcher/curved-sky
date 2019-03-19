@@ -1,14 +1,22 @@
-import axios from 'axios';
+import { get, debounce } from 'lodash';
+import cms from '../../services/cms';
+
+const rootUrl = 'http://159.89.132.165';
 
 function transformPost(post) {
+  const cover = get(post, 'cover', null);
+  const tags = get(post, 'tags', '');
   return {
     ...post,
-    body: post.body
-      .match(/!\[.*\]\(.*\)/g)
-      .reduce(
-        (acc, image) => acc.split(image).join(image.replace('](', '](http://cms.shannonarcher.me')),
-        post.body,
-      ),
+    // eslint-disable-next-line no-underscore-dangle
+    id: post._id,
+    cover: cover
+      ? null
+      : {
+        ...cover,
+        url: `${rootUrl}/${cover.path}`,
+      },
+    tags: tags.split(','),
   };
 }
 
@@ -17,25 +25,29 @@ export default {
   state: {
     posts: [],
   },
+  getters: {
+    entries(state) {
+      return (state.posts || []).map(p => transformPost(p));
+    },
+  },
   actions: {
-    getPost({ state, commit }, id) {
-      const existing = state.posts.find(x => x.id === id);
+    getEntry({ state, getters, commit }, id) {
+      const existing = getters.entries.find(x => x.id.toString() === id.toString());
       if (existing) {
         return existing;
       }
 
-      return axios.get(`http://cms.shannonarcher.me/posts/${id}`).then(({ data: post }) => {
-        commit('setPosts', [...state.posts, transformPost(post)]);
-        return transformPost(post);
+      return cms.get('posts', { id }).then(({ entries: posts }) => {
+        commit('setPosts', [...state.posts, ...posts]);
       });
     },
-    getPosts({ commit }) {
-      return axios
-        .get('http://cms.shannonarcher.me/posts?published=1&_sort=created_at:DESC')
-        .then(({ data: posts }) => {
-          commit('setPosts', posts.map(transformPost));
-        });
-    },
+    getEntries: debounce(
+      ({ commit }) => cms.get('posts', { published: true }).then(({ entries: posts }) => {
+        commit('setPosts', posts);
+      }),
+      60000,
+      { leading: true, trailing: false },
+    ),
   },
   mutations: {
     setPosts(state, posts) {

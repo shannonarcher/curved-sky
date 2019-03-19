@@ -10,36 +10,36 @@
 </template>
 
 <script>
-import axios from "axios";
-import Markdown from "vue-markdown";
-import { mapActions } from "vuex";
+import axios from 'axios';
+import Markdown from 'vue-markdown';
+import { mapActions, mapGetters } from 'vuex';
+import { get } from 'lodash';
 
 export default {
-  name: "Post",
+  name: 'Post',
   components: {
-    Markdown
+    Markdown,
   },
-  data: () => ({
-    post: {}
-  }),
   computed: {
     id() {
       return this.$router.currentRoute.params.id;
     },
     coverImageUrl() {
-      if (this.post && this.post.cover && this.post.cover.url) {
-        return `http://cms.shannonarcher.me${this.post.cover.url}`;
-      }
-      return "";
-    }
+      return get(this.post, 'cover.url', '');
+    },
+    post() {
+      return this.posts.find(p => p.id.toString() === this.id.toString()) || {};
+    },
+    ...mapGetters({
+      posts: 'blog/entries',
+    }),
   },
-  async beforeMount() {
-    const post = await this.getPost(this.id);
-    this.post = post;
+  beforeMount() {
+    this.getEntry(this.id);
   },
   methods: mapActions({
-    getPost: "blog/getPost"
-  })
+    getEntry: 'blog/getEntry',
+  }),
 };
 </script>
 <style lang="sass">
@@ -47,4 +47,3 @@ export default {
   .back-button
     font-size: 30px
 </style>
-

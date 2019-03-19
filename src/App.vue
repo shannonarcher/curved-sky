@@ -6,40 +6,40 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Vuex from "vuex";
-import VueRouter from "vue-router";
-import Sidebar from "./components/Sidebar";
-import BlogRoll from "./pages/BlogRoll";
-import Post from "./pages/Post.vue";
-import storeConfig from "./store/store.js";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import VueRouter from 'vue-router';
+import Sidebar from './components/Sidebar';
+import BlogRoll from './pages/BlogRoll';
+import Post from './pages/Post.vue';
+import storeConfig from './store/store.js';
 
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes: [
     {
-      name: "home",
-      path: "/",
-      component: BlogRoll
+      name: 'home',
+      path: '/',
+      component: BlogRoll,
     },
     {
-      name: "post",
-      path: "/post/:id",
-      component: Post
-    }
-  ]
+      name: 'post',
+      path: '/post/:id',
+      component: Post,
+    },
+  ],
 });
 
 Vue.use(Vuex);
 const store = new Vuex.Store(storeConfig);
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
-    Sidebar
+    Sidebar,
   },
   router,
-  store
+  store,
 };
 </script>
 

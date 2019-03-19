@@ -4,8 +4,11 @@
       <h1 class="post__title">
         <router-link :to="{ name: 'post', params: { id: post.id } }">{{ post.title }}</router-link>
       </h1>
+      <div class="post__tags">
+        <span class="post_tag" v-for="(tag, index) in post.tags" :key="index">{{ tag }}</span>
+      </div>
       <div class="post__body">
-        <Markdown>{{ post.body }}</Markdown>
+        <Markdown>{{ post.excerpt }}</Markdown>
         <div class="post__mask"></div>
       </div>
     </section>
@@ -13,29 +16,29 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import Markdown from "vue-markdown";
+import { mapActions, mapGetters } from 'vuex';
+import Markdown from 'vue-markdown';
 
 export default {
-  name: "BlogRoll",
+  name: 'BlogRoll',
   components: {
-    Markdown
+    Markdown,
   },
-  data: () => ({
-    posts: []
-  }),
   props: {
     limit: {
       type: Number,
-      default: 10
-    }
+      default: 10,
+    },
   },
+  computed: mapGetters({
+    posts: 'blog/entries',
+  }),
   mounted() {
-    this.getPosts();
+    this.getEntries();
   },
   methods: mapActions({
-    getPosts: "blog/getPosts"
-  })
+    getEntries: 'blog/getEntries',
+  }),
 };
 </script>
 
@@ -61,12 +64,4 @@ export default {
         padding: 0
         font-weight: normal
         font-size: 14px
-
-    &__mask
-      position: absolute
-      top: 0
-      width: 100%
-      height: 100%
-      z-index: 2
-      background: linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%)
 </style>
