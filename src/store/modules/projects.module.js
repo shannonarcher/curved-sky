@@ -17,7 +17,7 @@ export default {
   },
   actions: {
     getEntries: debounce(
-      ({ commit }) => cms.get('projects', { published: true }).then(({ entries: projects }) => {
+      ({ commit }) => cms.collection.get('projects', { published: true }).then(({ entries: projects }) => {
         commit('setProjects', projects);
       }),
       60000,

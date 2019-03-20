@@ -37,12 +37,12 @@ export default {
         return existing;
       }
 
-      return cms.get('posts', { id }).then(({ entries: posts }) => {
+      return cms.collection.get('posts', { id }).then(({ entries: posts }) => {
         commit('setPosts', [...state.posts, ...posts]);
       });
     },
     getEntries: debounce(
-      ({ commit }) => cms.get('posts', { published: true }).then(({ entries: posts }) => {
+      ({ commit }) => cms.collection.get('posts', { published: true }).then(({ entries: posts }) => {
         commit('setPosts', posts);
       }),
       60000,
