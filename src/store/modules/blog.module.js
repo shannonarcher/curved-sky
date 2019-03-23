@@ -1,22 +1,24 @@
 import { get, debounce } from 'lodash';
+import moment from 'moment';
 import cms from '../../services/cms';
 
 const rootUrl = 'http://159.89.132.165';
 
 function transformPost(post) {
   const cover = get(post, 'cover', null);
-  const tags = get(post, 'tags', '');
+  const tags = get(post, 'tags', null);
   return {
     ...post,
     // eslint-disable-next-line no-underscore-dangle
     id: post._id,
     cover: cover
-      ? null
-      : {
+      ? {
         ...cover,
         url: `${rootUrl}/${cover.path}`,
-      },
-    tags: tags.split(','),
+      }
+      : null,
+    tags: tags ? tags.split(',') : [],
+    createdAt: moment(post._created * 1000).fromNow(),
   };
 }
 
@@ -27,7 +29,7 @@ export default {
   },
   getters: {
     entries(state) {
-      return (state.posts || []).map(p => transformPost(p));
+      return (state.posts || []).map(p => transformPost(p)).sort((a, b) => b._created - a._created);
     },
   },
   actions: {

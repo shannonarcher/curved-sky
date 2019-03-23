@@ -14,6 +14,9 @@ import BlogRoll from "./pages/BlogRoll";
 import Post from "./pages/Post.vue";
 import storeConfig from "./store/store.js";
 
+import VueMasonry from "vue-masonry-css";
+Vue.use(VueMasonry);
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faMapMarker, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faGithubAlt } from "@fortawesome/free-brands-svg-icons";
@@ -57,21 +60,29 @@ export default {
 <style lang="sass">
 @import 'styles/global.sass'
 
+html, body, #app
+  width: 100%
+  background: #fcfcfc
+  margin: 0
+  padding: 0
+
 #app
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   text-align: center
   color: #2c3e50
-  margin-top: 60px
+  margin: 0
+  padding: 0
 
   @include respond-to('large')
     display: flex
     flex-direction: row
 
     .sidebar
-      width: 300px
+      min-width: 300px
 
     .blogroll
       flex: 1
+      margin: 30px
 </style>
