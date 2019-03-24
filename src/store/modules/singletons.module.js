@@ -14,7 +14,7 @@ export default {
       if (profile) {
         return {
           ...profile,
-          image: `${rootUrl}/${get(profile.image, 'path', '')}`,
+          image: profile.image.path ? `${rootUrl}/${get(profile.image, 'path', '')}` : null,
         };
       }
       return {};

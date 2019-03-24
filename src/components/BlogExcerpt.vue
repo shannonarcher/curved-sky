@@ -1,13 +1,19 @@
 <template>
-  <router-link :to="{ name: 'post', params: { id: post.id } }" class="blog-excerpt">
+  <router-link
+    :to="{ name: 'post', params: { id: post.id } }"
+    class="blog-excerpt"
+    :style="{
+      borderTop: `solid 3px ${post.coverBackground}`
+    }"
+  >
     <h1 class="blog-excerpt__title">{{ post.title }}</h1>
     <div class="blog-excerpt__subtitle">
       <div class="blog-excerpt__created-at" v-if="createdAt">{{ post.createdAt }}</div>
       <div class="blog-excerpt__tags" v-if="post.tags.length">
         in
         <span class="blog-excerpt__tag" v-for="(tag, index) in post.tags" :key="index">
-          {{ tag }}
-          <template v-if="index + 1 < post.tags.length">,</template>
+          <template>{{ tag }}</template>
+          <template v-if="index + 1 < post.tags.length">,&nbsp;</template>
         </span>
       </div>
     </div>
@@ -49,7 +55,7 @@ export default {
   display: block
   border-radius: 2px
   transform: scale(1)
-  transition: transform 250ms
+  transition: transform 250ms, box-shadow 250ms
   padding: 30px
   color: inherit
   text-decoration: none
@@ -57,6 +63,7 @@ export default {
 
   &:hover
     transform: scale(1.02)
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 15px
 
   &__title
     font-size: 20px
@@ -88,8 +95,4 @@ export default {
       padding: 0
       font-weight: normal
       font-size: 14px
-
-  &__tag
-
 </style>
-

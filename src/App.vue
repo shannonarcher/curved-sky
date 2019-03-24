@@ -80,9 +80,15 @@ html, body, #app
     flex-direction: row
 
     .sidebar
-      min-width: 300px
+      max-width: 350px
+      min-width: 350px
 
     .blogroll
       flex: 1
-      margin: 30px
+      margin: 30px 30px 30px 0
+
+    .post
+      flex: 1
+
+    a 
 </style>

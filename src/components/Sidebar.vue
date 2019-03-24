@@ -6,6 +6,8 @@
           <img :src="profile.image">
         </router-link>
       </div>
+      <router-link :to="{ name: 'home' }" v-else class="sidebar__initials">SA</router-link>
+
       <div class="sidebar__social-links">
         <ul>
           <li v-if="profile.locationName" class="link link--map">
@@ -75,6 +77,18 @@ export default {
 
 .sidebar 
   text-align: center
+
+  &__initials
+    display: block
+    background: #ccc
+    width: 150px
+    height: 150px
+    margin: auto auto 30px
+    border-radius: 50%
+    font-weight: bold
+    font-size: 72px
+    line-height: 150px
+    color: #fff !important
 
   &__card
     background: #fff
