@@ -14,9 +14,6 @@ import BlogRoll from "./pages/BlogRoll";
 import Post from "./pages/Post.vue";
 import storeConfig from "./store/store.js";
 
-import VueMasonry from "vue-masonry-css";
-Vue.use(VueMasonry);
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faMapMarker, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faGithubAlt } from "@fortawesome/free-brands-svg-icons";
