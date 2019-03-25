@@ -134,6 +134,8 @@ export default {
     padding: 30px
     border-radius: 4px
     font-weight: bold
+    max-width: 100%
+    overflow: scroll
         
   @include respond-to('small')
     margin: 30px
