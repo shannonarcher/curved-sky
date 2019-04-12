@@ -27,15 +27,11 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import Markdown from "vue-markdown";
 import render from "../services/markdown";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Post",
-  components: {
-    Markdown
-  },
   computed: {
     id() {
       return this.$router.currentRoute.params.id;
@@ -136,11 +132,8 @@ export default {
     font-weight: bold
 
   pre
-    color: #fff
-    background: #383830
     padding: 30px
     border-radius: 4px
-    font-weight: bold
     max-width: 100%
     overflow: scroll
         

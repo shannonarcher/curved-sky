@@ -6,13 +6,11 @@ const markdownRenderer = new Markdownit({
   highlight(str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return hljs.highlight(lang, str).value;
-      } catch (__) {
-        console.error('An error occurred when highlighting code block.');
-      }
+        return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value}</code></pre>`;
+      } catch (__) {}
     }
 
-    return ''; // use external default escaping
+    return `<pre class="hljs"><code>${markdownRenderer.utils.escapeHtml(str)}</code></pre>`;
   },
 });
 
