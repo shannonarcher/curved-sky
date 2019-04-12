@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <Markdown v-if="post.body" class="post__body">{{ post.body }}</Markdown>
+      <div v-if="post.body" class="post__body" v-html="body"></div>
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@
 import axios from "axios";
 import moment from "moment";
 import Markdown from "vue-markdown";
+import render from "../services/markdown";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -44,6 +45,12 @@ export default {
     },
     createdAt() {
       return moment(this.post._created * 1000).format("MMMM Do, YYYY");
+    },
+    body() {
+      if (this.post.body) {
+        return render(this.post.body);
+      }
+      return "";
     },
     ...mapGetters({
       posts: "blog/entries"

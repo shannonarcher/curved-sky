@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="blog-excerpt__body">
-      <Markdown>{{ post.excerpt }}</Markdown>
+      <div v-html="excerpt"></div>
       <div class="blog-excerpt__mask"></div>
     </div>
   </router-link>
@@ -26,12 +26,9 @@
 
 <script>
 import moment from "moment";
-import Markdown from "vue-markdown";
+import render from "../services/markdown";
 
 export default {
-  components: {
-    Markdown
-  },
   props: {
     post: {
       type: Object,
@@ -39,6 +36,9 @@ export default {
     }
   },
   computed: {
+    excerpt() {
+      return render(this.post.excerpt);
+    },
     createdAt() {
       return moment(this.post._created * 1000).fromNow();
     }

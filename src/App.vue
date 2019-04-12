@@ -86,6 +86,4 @@ html, body, #app
 
     .post
       flex: 1
-
-    a 
 </style>
