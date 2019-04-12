@@ -1,6 +1,10 @@
-import hljs from 'highlight.js';
+import hljs from 'highlight.js/lib/highlight';
+import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/monokai-sublime.css';
+
 import Markdownit from 'markdown-it';
+
+hljs.registerLanguage('javascript', javascript);
 
 const markdownRenderer = new Markdownit({
   highlight(str, lang) {

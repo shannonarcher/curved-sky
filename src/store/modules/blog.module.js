@@ -1,4 +1,5 @@
-import { get, debounce } from 'lodash';
+import get from 'lodash/get';
+import debounce from 'lodash/debounce';
 import moment from 'moment';
 import cms from '../../services/cms';
 
