@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import axios from "axios";
-import moment from "moment";
-import render from "../services/markdown";
-import { mapActions, mapGetters } from "vuex";
+import axios from 'axios';
+import moment from 'moment';
+import { mapActions, mapGetters } from 'vuex';
+import render from '../services/markdown';
 
 export default {
-  name: "Post",
+  name: 'Post',
   computed: {
     id() {
       return this.$router.currentRoute.params.id;
@@ -40,24 +40,24 @@ export default {
       return this.posts.find(p => p.id.toString() === this.id.toString()) || {};
     },
     createdAt() {
-      return moment(this.post._created * 1000).format("MMMM Do, YYYY");
+      return moment(this.post._created * 1000).format('MMMM Do, YYYY');
     },
     body() {
       if (this.post.body) {
         return render(this.post.body);
       }
-      return "";
+      return '';
     },
     ...mapGetters({
-      posts: "blog/entries"
-    })
+      posts: 'blog/entries',
+    }),
   },
   beforeMount() {
     this.getEntry(this.id);
   },
   methods: mapActions({
-    getEntry: "blog/getEntry"
-  })
+    getEntry: 'blog/getEntry',
+  }),
 };
 </script>
 <style lang="sass">
@@ -94,7 +94,7 @@ export default {
     margin: 0 -30px
     width: calc(100% + 60px)
     height: 300px
-    
+
     img
       width: 100%
       object-fit: contain
@@ -121,7 +121,7 @@ export default {
     @include respond-to('medium')
       padding: 0 30px 30px
 
-      img 
+      img
         max-width: 80%
 
   &__tag
@@ -136,7 +136,7 @@ export default {
     border-radius: 4px
     max-width: 100%
     overflow: scroll
-        
+
   @include respond-to('small')
     margin: 30px
 

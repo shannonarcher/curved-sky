@@ -5,29 +5,29 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import BlogExcerpt from "../components/BlogExcerpt";
+import { mapActions, mapGetters } from 'vuex';
+import BlogExcerpt from '../components/BlogExcerpt';
 
 export default {
-  name: "BlogRoll",
+  name: 'BlogRoll',
   components: {
-    BlogExcerpt
+    BlogExcerpt,
   },
   props: {
     limit: {
       type: Number,
-      default: 10
-    }
+      default: 10,
+    },
   },
   computed: mapGetters({
-    posts: "blog/entries"
+    posts: 'blog/entries',
   }),
   mounted() {
     this.getEntries();
   },
   methods: mapActions({
-    getEntries: "blog/getEntries"
-  })
+    getEntries: 'blog/getEntries',
+  }),
 };
 </script>
 

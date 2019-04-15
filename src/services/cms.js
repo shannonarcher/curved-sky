@@ -6,7 +6,7 @@ const getSingletonUrl = `${rootUrl}/api/singletons/get/`;
 
 export default {
   collection: {
-    async get(collection, { published, id }) {
+    async get(collection, { published, id, fields }) {
       const endpoint = `${getCollectionUrl}${collection}`;
 
       if (id) {
@@ -17,6 +17,10 @@ export default {
       let filters = '';
       if (published) {
         filters += `?filter[published]=${published}`;
+      }
+
+      if (fields) {
+        filters = `${`${filters}&` || '?'}${fields.map(f => `fields[${f}]=true`).join('&')}`;
       }
 
       // get all

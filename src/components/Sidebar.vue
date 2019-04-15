@@ -54,28 +54,28 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   mounted() {
-    this.getSingleton("profile");
+    this.getSingleton('profile');
     this.getProjects();
   },
   computed: mapGetters({
-    profile: "singletons/profile",
-    projects: "projects/entries"
+    profile: 'singletons/profile',
+    projects: 'projects/entries',
   }),
   methods: mapActions({
-    getSingleton: "singletons/getSingleton",
-    getProjects: "projects/getEntries"
-  })
+    getSingleton: 'singletons/getSingleton',
+    getProjects: 'projects/getEntries',
+  }),
 };
 </script>
 
 <style lang="sass">
 @import '../styles/global.sass'
 
-.sidebar 
+.sidebar
   text-align: center
 
   &__initials
@@ -118,7 +118,7 @@ export default {
     margin: 10px auto
     justify-content: center
 
-    svg 
+    svg
       width: 20px !important
       margin-right: 5px
 
@@ -126,7 +126,7 @@ export default {
       width: 100%
       margin-bottom: 10px
       border: none
-    
+
     li
       padding: 0 10px
       border-left: solid 1px #000
@@ -141,7 +141,7 @@ export default {
       color: #d14836
     &--instagram svg
       color: #cd486b
-  
+
   @include respond-to('large')
     ul li
       flex: 1

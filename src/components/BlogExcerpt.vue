@@ -25,15 +25,15 @@
 </template>
 
 <script>
-import moment from "moment";
-import render from "../services/markdown";
+import moment from 'moment';
+import render from '../services/markdown';
 
 export default {
   props: {
     post: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     excerpt() {
@@ -41,8 +41,8 @@ export default {
     },
     createdAt() {
       return moment(this.post._created * 1000).fromNow();
-    }
-  }
+    },
+  },
 };
 </script>
 

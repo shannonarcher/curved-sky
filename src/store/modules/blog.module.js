@@ -35,19 +35,27 @@ export default {
   },
   actions: {
     getEntry({ state, getters, commit }, id) {
-      const existing = getters.entries.find(x => x.id.toString() === id.toString());
+      const existing = getters.entries.find(x => x.id.toString() === id.toString() && x.body);
       if (existing) {
         return existing;
       }
 
       return cms.collection.get('posts', { id }).then(({ entries: posts }) => {
-        commit('setPosts', [...state.posts, ...posts]);
+        commit('setPosts', [
+          ...state.posts.filter(p => p._id.toString() !== id.toString()),
+          ...posts,
+        ]);
       });
     },
     getEntries: debounce(
-      ({ commit }) => cms.collection.get('posts', { published: true }).then(({ entries: posts }) => {
-        commit('setPosts', posts);
-      }),
+      ({ commit }) => cms.collection
+        .get('posts', {
+          published: true,
+          fields: ['title', 'excerpt', '_created', 'coverBackground'],
+        })
+        .then(({ entries: posts }) => {
+          commit('setPosts', posts);
+        }),
       60000,
       { leading: true, trailing: false },
     ),
