@@ -17,11 +17,11 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 
-import {library} from '@fortawesome/fontawesome-svg-core';
-import faMapMarker from '@fortawesome/free-solid-svg-icons/faMapMarker';
-import faEnvelope from '@fortawesome/free-solid-svg-icons/faEnvelope';
-import faInstagram from '@fortawesome/free-brands-svg-icons/faInstagram';
-import faGithubAlt from '@fortawesome/free-brands-svg-icons/faGithubAlt';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faMapMarker } from '@fortawesome/free-solid-svg-icons/faMapMarker';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
+import { faGithubAlt } from '@fortawesome/free-brands-svg-icons/faGithubAlt';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import Sidebar from './components/Sidebar';
