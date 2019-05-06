@@ -10,13 +10,13 @@ export default {
     date: {
       type: Number,
       default: '',
-    }
+    },
   },
   computed: {
     formattedDate() {
       return moment(this.date * 1000).fromNow();
-    }
-  }
+    },
+  },
 };
 </script>
 

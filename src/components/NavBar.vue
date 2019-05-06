@@ -57,7 +57,7 @@ export default {
 
     *:first-child
       flex: 1
-      opacity: 
+      opacity:
 
     @include respond-to('medium')
       max-width: $screen-m
@@ -69,7 +69,7 @@ export default {
 
     text-decoration: none
     color: $lightForeground
-  
+
   .link
     &--home a:hover
       opacity: 0.8
@@ -90,7 +90,7 @@ export default {
     li a
       display: block
       padding: 0 0.7em
-      
+
       svg
         margin: auto
 

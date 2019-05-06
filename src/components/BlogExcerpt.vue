@@ -3,7 +3,7 @@
     :to="{ name: 'post', params: { id: post.id } }"
     class="blog-excerpt"
   >
-    <DateTags 
+    <DateTags
       class="blog-excerpt__subtitle"
       :tags="post.tags"
       :date="post._created"

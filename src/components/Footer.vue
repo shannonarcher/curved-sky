@@ -64,7 +64,7 @@ export default {
     color: $lightForeground
     opacity: 0.7
 
-    &:hover 
+    &:hover
       opacity: 1
 
   ul
