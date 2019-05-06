@@ -16,17 +16,20 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMapMarker, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram, faGithubAlt } from '@fortawesome/free-brands-svg-icons';
+
+import {library} from '@fortawesome/fontawesome-svg-core';
+import faMapMarker from '@fortawesome/free-solid-svg-icons/faMapMarker';
+import faEnvelope from '@fortawesome/free-solid-svg-icons/faEnvelope';
+import faInstagram from '@fortawesome/free-brands-svg-icons/faInstagram';
+import faGithubAlt from '@fortawesome/free-brands-svg-icons/faGithubAlt';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 import Sidebar from './components/Sidebar';
 import BlogRoll from './pages/BlogRoll';
 import Post from './pages/Post.vue';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import storeConfig from './store/store.js';
-
 
 library.add(faMapMarker);
 library.add(faEnvelope);
