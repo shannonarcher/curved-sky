@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="app__header">
-      <NavBar/>
+      <Header/>
     </div>
     <div class="app__body">
       <RouterView/>
@@ -24,7 +24,7 @@ import Sidebar from './components/Sidebar';
 import BlogRoll from './pages/BlogRoll';
 import Post from './pages/Post.vue';
 import Footer from './components/Footer';
-import NavBar from './components/NavBar';
+import Header from './components/Header';
 import storeConfig from './store/store.js';
 
 
@@ -61,7 +61,7 @@ export default {
   name: 'app',
   components: {
     Footer,
-    NavBar,
+    Header,
   },
   router,
   store,
