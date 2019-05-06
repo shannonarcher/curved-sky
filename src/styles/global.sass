@@ -1,22 +1,50 @@
+
+$screen-s: 769px
+$screen-m: 992px
+$screen-l: 1200px  
 $breakpoints: ( 'small': ( min-width: 769px ), 'medium': ( min-width: 992px ), 'large': ( min-width: 1200px ) ) !default
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400|Raleway:300|Source+Code+Pro:400');
 
 * 
-  font-family: 'Open Sans', sans-serif
-
-h1, h2, h3, h4, h5
   font-family: 'Roboto', sans-serif
+  font-weight: 300
+
+strong
+  font-weight: 400
+
+h1
+  font-size: 4em
+
+.body-font
+  font-size: 2em
+  line-height: 2em
+  font-weight: 300
+
+h1, h2, h3, h4, h5, .heading-font
+  font-family: 'Raleway', sans-serif
+  font-weight: 300
 
   & *
-    font-family: 'Roboto', sans-serif
+    font-family: 'Raleway', sans-serif
 
 code, code *
   font-family: 'Source Code Pro', monospace
+  font-weight: 400 !important
 
 $orange: #e07543
 $blue: #43b3e0
 $light-gray: #aaa
+$black: #26262a
+$white: #fff
+
+$title: $black
+$subtitle: $light-gray
+
+$darkBackground: $black
+$lightForeground: white
+
+$weight-thin: 300
 
 @mixin respond-to($breakpoint)
   // If the key exists in the map

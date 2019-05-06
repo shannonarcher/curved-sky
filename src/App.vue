@@ -1,7 +1,14 @@
 <template>
   <div id="app">
-    <Sidebar/>
-    <RouterView/>
+    <div class="app__header">
+      <NavBar/>
+    </div>
+    <div class="app__body">
+      <RouterView/>
+    </div>
+    <div class="app__footer">
+      <Footer/>
+    </div>
   </div>
 </template>
 
@@ -16,6 +23,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Sidebar from './components/Sidebar';
 import BlogRoll from './pages/BlogRoll';
 import Post from './pages/Post.vue';
+import Footer from './components/Footer';
+import NavBar from './components/NavBar';
 import storeConfig from './store/store.js';
 
 
@@ -47,7 +56,8 @@ const store = new Vuex.Store(storeConfig);
 export default {
   name: 'app',
   components: {
-    Sidebar,
+    Footer,
+    NavBar,
   },
   router,
   store,
@@ -58,7 +68,9 @@ export default {
 @import 'styles/global.sass'
 
 html, body, #app
+  font-size: 10px
   width: 100%
+  height: 100%
   background: #fcfcfc
   margin: 0
   padding: 0
@@ -71,19 +83,14 @@ html, body, #app
   color: #2c3e50
   margin: 0
   padding: 0
+  display: flex
+  flex-direction: column
 
-  @include respond-to('large')
-    display: flex
-    flex-direction: row
+  .app__body
+    max-width: 100%
+    margin: auto
+    flex: 1
 
-    .sidebar
-      max-width: 350px
-      min-width: 350px
-
-    .blogroll
-      flex: 1
-      margin: 30px 30px 30px 0
-
-    .post
-      flex: 1
+    @include respond-to('medium')
+      max-width: $screen-m
 </style>

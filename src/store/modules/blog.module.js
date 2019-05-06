@@ -51,7 +51,7 @@ export default {
       ({ commit }) => cms.collection
         .get('posts', {
           published: true,
-          fields: ['title', 'excerpt', '_created', 'coverBackground'],
+          fields: ['title', 'excerpt', 'tags', '_created', 'coverBackground'],
         })
         .then(({ entries: posts }) => {
           commit('setPosts', posts);

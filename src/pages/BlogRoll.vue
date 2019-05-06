@@ -1,6 +1,11 @@
 <template>
   <div class="blogroll">
-    <BlogExcerpt v-for="post in posts" :key="post.id" :post="post" class="blogroll__excerpt"></BlogExcerpt>
+    <div class="blogroll__heading">
+      <h1>As a developer and someone finding their way, here's a look into what I think about.</h1>
+    </div>
+    <div class="blogroll__excerpts">
+      <BlogExcerpt v-for="post in posts" :key="post.id" :post="post" class="blogroll__excerpt"></BlogExcerpt>
+    </div>
   </div>
 </template>
 
@@ -35,22 +40,9 @@ export default {
 @import '../styles/global.sass';
 
 .blogroll
-  text-align: left
-  display: grid
-  grid-template-columns: 100%
-  grid-gap: 30px
-  max-width: 100%
-
-  @include respond-to('small')
-    margin: 0 30px
-
-  @include respond-to('medium')
-    grid-template-columns: calc(50% - 15px) calc(50% - 15px)
-
-  @include respond-to('large')
-    grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px)
-
-  &__excerpt
-    align-self: start
-
+  &__heading
+    h1
+      font-size: 3em
+      padding: 2em
+      margin: 0
 </style>
