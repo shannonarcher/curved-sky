@@ -30,11 +30,6 @@ export default {
             <fa-icon :icon="['fab', 'github-alt']"></fa-icon>
           </a>
         </li>
-        <li v-if="profile.instagram" class="link link--instagram">
-          <a :href="profile.instagram" target="_blank">
-            <fa-icon :icon="['fab', 'instagram']"></fa-icon>
-          </a>
-        </li>
       </ul>
     </div>
   </div>
