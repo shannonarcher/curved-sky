@@ -10,8 +10,7 @@ function transformPost(post) {
   const tags = get(post, 'tags', null);
   return {
     ...post,
-    // eslint-disable-next-line no-underscore-dangle
-    id: post._id,
+    id: post.title.replace(/[^0-9a-zA-Z\s]/g, '').replace(/\s/g, '-').toLowerCase(),
     cover: cover
       ? {
         ...cover,
@@ -34,31 +33,40 @@ export default {
     },
   },
   actions: {
-    getEntry({ state, getters, commit }, id) {
-      const existing = getters.entries.find(x => x.id.toString() === id.toString() && x.body);
-      if (existing) {
+    async getEntry({ state, getters, commit, dispatch }, id) {
+      const existing = getters.entries.find(x => x.id.toString() === id.toString());
+      if (existing && existing.body) {
         return existing;
       }
 
-      return cms.collection.get('posts', { id }).then(({ entries: posts }) => {
+      if (!existing) {
+        await dispatch('refreshEntries');
+      }
+
+      const newExisting = getters.entries.find(x => x.id.toString() === id.toString());
+
+      if (newExisting) {
+        const actualId = newExisting._id;
+        const { entries: posts } = await cms.collection.get('posts', { id: actualId });
         commit('setPosts', [
-          ...state.posts.filter(p => p._id.toString() !== id.toString()),
+          ...state.posts.filter(p => p._id.toString() !== actualId.toString()),
           ...posts,
         ]);
-      });
+      }
     },
     getEntries: debounce(
-      ({ commit }) => cms.collection
-        .get('posts', {
-          published: true,
-          fields: ['title', 'excerpt', 'tags', '_created', 'coverBackground'],
-        })
-        .then(({ entries: posts }) => {
-          commit('setPosts', posts);
-        }),
+      ({ dispatch }) => dispatch('refreshEntries'),
       60000,
       { leading: true, trailing: false },
     ),
+    async refreshEntries({ commit }) {
+      const { entries: posts } = await cms.collection
+        .get('posts', {
+          published: true,
+          fields: ['title', 'excerpt', 'tags', '_created', 'coverBackground'],
+        });
+      commit('setPosts', posts);
+    },
   },
   mutations: {
     setPosts(state, posts) {

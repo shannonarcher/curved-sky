@@ -48,6 +48,10 @@ const router = new VueRouter({
       component: Post,
     },
   ],
+  scrollBehavior() {
+    // page scroll to top for all route navigations
+    return { x: 0, y: 0 };
+  }
 });
 
 Vue.use(Vuex);
