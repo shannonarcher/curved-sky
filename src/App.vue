@@ -88,9 +88,11 @@ html, body, #app
 
   .app__body
     max-width: 100%
+    min-width: 100%
     margin: auto
     flex: 1
 
     @include respond-to('medium')
       max-width: $screen-m
+      min-width: $screen-m
 </style>
