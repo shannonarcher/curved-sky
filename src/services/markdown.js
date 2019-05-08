@@ -1,10 +1,12 @@
 import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
+import xml from 'highlight.js/lib/languages/xml';
 import 'highlight.js/styles/atom-one-dark-reasonable.css';
 
 import Markdownit from 'markdown-it';
 
 hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('xml', xml);
 
 const markdownRenderer = new Markdownit({
   highlight(str, lang) {
