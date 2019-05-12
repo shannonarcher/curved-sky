@@ -24,11 +24,12 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
 import { faGithubAlt } from '@fortawesome/free-brands-svg-icons/faGithubAlt';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-import Sidebar from './components/Sidebar';
-import BlogRoll from './pages/BlogRoll';
+import Sidebar from './components/Sidebar.vue';
+import BlogRoll from './pages/BlogRoll.vue';
 import Post from './pages/Post.vue';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Resume from './pages/Resume.vue';
+import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
 import storeConfig from './store/store.js';
 
 library.add(faMapMarker);
@@ -50,6 +51,11 @@ const router = new VueRouter({
       path: '/post/:id',
       component: Post,
     },
+    {
+      name: 'resume',
+      path: '/resume',
+      component: Resume,
+    }
   ],
   scrollBehavior() {
     // page scroll to top for all route navigations
