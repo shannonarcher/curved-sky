@@ -11,13 +11,12 @@
     <h1 class="blog-excerpt__title">{{ post.title }}</h1>
     <div class="blog-excerpt__body">
       <div v-html="excerpt"></div>
-      <div class="blog-excerpt__mask"></div>
     </div>
   </router-link>
 </template>
 
 <script>
-import render from '../services/markdown';
+import render from '@/services/markdown';
 import DateTags from '@/components/DateTags';
 
 export default {
