@@ -39,7 +39,7 @@ function createComponent({ post } = {}) {
 }
 
 describe('BlogExcerpt', () => {
-    describe('when clicking the blog excerpt', () => {
+    xdescribe('when clicking the blog excerpt', () => {
         test('should go to the related post page', () => {
             const { component, spies: { afterEach } } = createComponent();
             component.find('.blog-excerpt').trigger('click');

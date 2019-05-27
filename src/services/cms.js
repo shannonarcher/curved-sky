@@ -11,7 +11,8 @@ export default {
 
       if (id) {
         // get one
-        return axios.get(`${endpoint}?filter[_id]=${id}`).then(({ data }) => data);
+        const { data } = await axios.get(`${endpoint}?filter[_id]=${id}`);
+        return data;
       }
 
       let filters = '';
@@ -24,13 +25,15 @@ export default {
       }
 
       // get all
-      return axios.get(`${endpoint}${filters}`).then(({ data }) => data);
+      const { data } = await axios.get(`${endpoint}${filters}`);
+      return data;
     },
   },
   singleton: {
     async get(singleton) {
       const endpoint = `${getSingletonUrl}${singleton}`;
-      return axios.get(`${endpoint}`).then(({ data }) => data);
+      const {data} = await axios.get(`${endpoint}`);
+      return data;
     },
   },
 };

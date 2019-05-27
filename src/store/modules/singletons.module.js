@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 import debounce from 'lodash/debounce';
-import cms from '../../services/cms';
+import cms from '@/services/cms';
 
 const rootUrl = 'http://159.89.132.165';
 

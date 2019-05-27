@@ -1,22 +1,15 @@
 import get from 'lodash/get';
 import debounce from 'lodash/debounce';
 import moment from 'moment';
-import cms from '../../services/cms';
+import cms from '@/services/cms';
 
 const rootUrl = 'http://159.89.132.165';
 
 function transformPost(post) {
-  const cover = get(post, 'cover', null);
   const tags = get(post, 'tags', null);
   return {
     ...post,
     id: post.title.replace(/[^0-9a-zA-Z\s]/g, '').replace(/\s/g, '-').toLowerCase(),
-    cover: cover
-      ? {
-        ...cover,
-        url: `${rootUrl}/${cover.path}`,
-      }
-      : null,
     tags: tags ? tags.split(',') : [],
     createdAt: moment(post._created * 1000).fromNow(),
   };
@@ -63,7 +56,7 @@ export default {
       const { entries: posts } = await cms.collection
         .get('posts', {
           published: true,
-          fields: ['title', 'excerpt', 'tags', '_created', 'coverBackground'],
+          fields: ['title', 'excerpt', 'tags', '_created'],
         });
       commit('setPosts', posts);
     },
