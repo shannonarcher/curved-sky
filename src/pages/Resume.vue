@@ -1,77 +1,90 @@
 <script>
+import PhoneFormatter from '@/filters/phone.js';
+import DateFormatter from '@/filters/date.js';
+import Markdown from '@/components/Markdown.vue';
+
+import get from 'lodash/get';
+import { mapActions, mapGetters } from 'vuex';
+import moment from 'moment';
+
 export default {
-  
+  filters: {
+    phone: PhoneFormatter,
+    date: DateFormatter,
+  },
+  components: {
+    Markdown,
+  },
+  computed: {
+    ...mapGetters({
+      resume: 'resume/resume',
+    }),
+    contact() {
+      return get(this.resume, 'contacts', {});
+    },
+  },
+  mounted() {
+    this.getResume();
+  },
+  methods: mapActions({
+    getResume: 'resume/getResume',
+  }),
 }
 </script>
 
 <template>
-  <div class="resume">
+  <div class="resume" v-if="resume">
     <div class="personal-info">
       <h1 class="personal-info__name title">
-        Shannon Archer
+        {{ resume.name }}
       </h1>
       <h2 class="personal-info__title subtitle">
-        Senior Software Developer
+        {{ resume.title }}
       </h2>
     </div>
 
     <div class="contact-info">
       <ul>
-        <li><a href="mailto:shannon@shannonarcher.me">shannon@shannonarcher.me</a></li>
-        <li><a href="https://github.com/shannonarcher">github.com/shannonarcher</a></li>
-        <li><a href="http://shannonarcher.me">shannonarcher.me</a></li>
-        <li><a href="tel:3123699517">(312) 369-9517</a></li>
+        <li><a :href="`mailto:${contact.email}`">{{ contact.email }}</a></li>
+        <li><a :href="`https://${contact.github}`">{{ contact.github }}</a></li>
+        <li><a :href="`http://${contact.website}`">{{ contact.website }}</a></li>
+        <li>
+          <a :href="`tel:${contact.phone}`">
+            {{ contact.phone | phone }}
+          </a>
+        </li>
       </ul>
     </div>
 
     <div class="summary">
-
+      <Markdown>{{ resume.summary }}</Markdown>
     </div>
 
     <div class="experience">
       <h1>Experience</h1>
-      <h2>Senior Frontend Developer</h2>
-      <h3>Zoro</h3>
-      <h3>04/2019 - present</h3>
-      <ul>
-        <li>I am critical in the current incremental refactor of our ecommerce front-end into a modern web application built in Vue with a focus on speed, reliability and SEO value.</li>
-        <li>I am working extensively with UI/UX, product owners, data analysts and other teams to deliver a quality user experience and improve conversion across the site.</li>
-        <li>I dedicate considerable focus on the mentorship and leadership of developers located within and outside of the team I am technical lead for.</li>
-        <li>I am involved in the continued introduction of robust work processes for version control, documentation, peer review, communities of practice etc as the IT department grows.</li>
-      </ul>
 
-      <h2>IT Developer</h2>
-      <h3>Zoro</h3>
-      <h3>01/2018 - 04/2010</h3>
-      <ul>
-        <li>I supported the technical lead by taking on major technical refactors and mentoring of other developers on the team.</li>
-        <li>I lead the implementation of a Vue SPA for the site’s checkout experience, completing the major foundational work necessary to meet the requirements of a large ecommerce company’s product and development flow through SSR, webpack, Vuex, vue-test-utils and advanced component design.</li>
-        <li>I developed and executed the technical interview process for front-end candidates during an extensive hiring initiative.</li>
-        <li>I championed unit testing of Vue quickly becoming the subject matter expert and presenting multiple training sessions for the department.</li>
-      </ul>
-
-      <h2>Software Developer</h2>
-      <h3>Coates Group</h3>
-      <h3>11/2015 - 01/2018</h3>
-      <ul>
-        <li>I focused on an Angular 1.x content management system that worked with a proprietary delivery network for managing html5 content run on in-store digital hardware for quick-service restaurants.</li>
-        <li>I worked with designers and product owners in the creation of process and technology for optimising the development of html5 content through tools such as gulp, project generators, and an evolving component library powered by Vue.</li>
-      </ul>
-
-      <h2>Freelancer</h2>
-      <h3>Self</h3>
-      <h3>01/2014 - 01/2016</h3>
-      <ul>
-        <li>I started a business which began as simple PSD - HTML builds and evolved into small-scale cms-backed web applications.</li>
-        <li>Responsibilities involved acquiring business, talking to clients, requirements gathering, working with various other stakeholders and development, deployment and management of projects.</li>
-      </ul>
+      <div
+        v-for="{ title, company, start, end, description } in resume.experience"
+        :key="`${title}:${company}`"
+      >
+        <h2>{{ title }}</h2>
+        <h3>{{ company }}</h3>
+        <h3>{{ start | date('MM/YYYY') }} - {{ end | date('MM/YYYY') }}</h3>
+        <Markdown v-if="description">{{ description }}</Markdown>
+      </div>
     </div>
 
     <div class="education">
       <h1>Education</h1>
-      <h2>Bachelor of Computer Science</h2>
-      <h3>University of Wollongong</h3>
-      <h3>2011 - 2015</h3>
+
+      <div 
+        v-for="{ title, institution, start, end } in resume.education"
+        :key="title"
+      >
+        <h2>{{ title }}</h2>
+        <h3>{{ institution }}</h3>
+        <h3>{{ start | date('YYYY') }} - {{ end | date('YYYY') }}</h3>
+      </div>
     </div>
   </div>
 </template>

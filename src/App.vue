@@ -24,7 +24,6 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
 import { faGithubAlt } from '@fortawesome/free-brands-svg-icons/faGithubAlt';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-import Sidebar from './components/Sidebar.vue';
 import BlogRoll from './pages/BlogRoll.vue';
 import Post from './pages/Post.vue';
 import Resume from './pages/Resume.vue';

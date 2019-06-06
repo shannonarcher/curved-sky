@@ -3,8 +3,6 @@ import debounce from 'lodash/debounce';
 import moment from 'moment';
 import cms from '@/services/cms';
 
-const rootUrl = 'http://159.89.132.165';
-
 function transformPost(post) {
   const tags = get(post, 'tags', null);
   return {

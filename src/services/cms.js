@@ -6,7 +6,7 @@ const getSingletonUrl = `${rootUrl}/api/singletons/get/`;
 
 export default {
   collection: {
-    async get(collection, { published, id, fields }) {
+    async get(collection, { published, id, fields } = {}) {
       const endpoint = `${getCollectionUrl}${collection}`;
 
       if (id) {
