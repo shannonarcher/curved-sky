@@ -29,7 +29,7 @@ export default {
   methods: mapActions({
     getResume: 'resume/getResume',
   }),
-}
+};
 </script>
 
 <template>
@@ -77,7 +77,7 @@ export default {
     <div class="education">
       <h1>Education</h1>
 
-      <div 
+      <div
         v-for="{ title, institution, start, end } in resume.education"
         :key="title"
       >
@@ -110,7 +110,7 @@ $gray: #999
   padding: 30px
   background: #fff
   border: solid 1px #ccc
-  
+
   @include respond-to('large')
     margin: 30px 120px
 
@@ -145,8 +145,8 @@ $gray: #999
 
   .contact-info
     grid-area: contact
-    justify-self: end
-    align-content: end
+    justify-self: flex-end
+    align-content: flex-end
     text-align: right
     padding-top: 0.67em
     display: flex
@@ -154,12 +154,12 @@ $gray: #999
     justify-content: flex-end
     padding: 15px 0
 
-    ul 
+    ul
       list-style: none
       font-size: 1.5em
       margin: 0
       padding: 0
-    
+
   .summary
     grid-area: sum
     border-top: #000 solid 1px

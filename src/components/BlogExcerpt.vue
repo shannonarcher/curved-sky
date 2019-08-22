@@ -9,6 +9,10 @@
       :date="post._created"
     />
     <h1 class="blog-excerpt__title">{{ post.title }}</h1>
+    <h2 class="blog-excerpt__time-to-read">
+      <strong>Time to Read:</strong>
+      {{ post.timeToRead }}
+    </h2>
     <div class="blog-excerpt__body">
       <div v-html="excerpt"></div>
     </div>
@@ -70,4 +74,7 @@ export default {
     p
       padding: 0
       line-height: 2em
+
+  &__time-to-read strong
+    font-weight: 600
 </style>

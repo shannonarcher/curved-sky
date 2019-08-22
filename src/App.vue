@@ -54,12 +54,12 @@ const router = new VueRouter({
       name: 'resume',
       path: '/resume',
       component: Resume,
-    }
+    },
   ],
   scrollBehavior() {
     // page scroll to top for all route navigations
     return { x: 0, y: 0 };
-  }
+  },
 });
 
 Vue.use(Vuex);

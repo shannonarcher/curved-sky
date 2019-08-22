@@ -10,6 +10,7 @@ function transformPost(post) {
     id: post.title.replace(/[^0-9a-zA-Z\s]/g, '').replace(/\s/g, '-').toLowerCase(),
     tags: tags ? tags.split(',') : [],
     createdAt: moment(post._created * 1000).fromNow(),
+    timeToRead: post.timeToRead,
   };
 }
 
@@ -24,7 +25,9 @@ export default {
     },
   },
   actions: {
-    async getEntry({ state, getters, commit, dispatch }, id) {
+    async getEntry({
+      state, getters, commit, dispatch,
+    }, id) {
       const existing = getters.entries.find(x => x.id.toString() === id.toString());
       if (existing && existing.body) {
         return existing;
@@ -54,7 +57,7 @@ export default {
       const { entries: posts } = await cms.collection
         .get('posts', {
           published: true,
-          fields: ['title', 'excerpt', 'tags', '_created'],
+          fields: ['title', 'excerpt', 'tags', '_created', 'timeToRead'],
         });
       commit('setPosts', posts);
     },

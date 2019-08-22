@@ -22,4 +22,4 @@ const markdownRenderer = new Markdownit({
 
 export default function (markdown) {
   return markdownRenderer.render(markdown);
-};
+}

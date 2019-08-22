@@ -32,7 +32,7 @@ export default {
   singleton: {
     async get(singleton) {
       const endpoint = `${getSingletonUrl}${singleton}`;
-      const {data} = await axios.get(`${endpoint}`);
+      const { data } = await axios.get(`${endpoint}`);
       return data;
     },
   },
