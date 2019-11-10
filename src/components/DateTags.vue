@@ -26,7 +26,7 @@ export default {
     <div class="date-tags__tags" v-if="tags.length">
       {{ formattedDate }} in
       <span class="date-tags__tag" v-for="(tag, index) in tags" :key="index">
-        <template>{{ tag }}</template>
+        <template>{{ tag.trim() }}</template>
         <template v-if="index + 1 < tags.length">,&nbsp;</template>
       </span>
     </div>
